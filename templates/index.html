@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Identifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Building Identifier</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Identify Building</button>
+    </form>
+
+    {% if building_name %}
+    <h2>Predicted Building: {{ building_name }}</h2>
+    <h3>Wikipedia Link: <a href="{{ wikipedia_link }}" target="_blank">{{ wikipedia_link }}</a></h3>
+    {% endif %}
+</div>
+</body>
+</html>
