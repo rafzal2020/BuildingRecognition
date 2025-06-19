@@ -1,9 +1,0 @@
-Flask
-gunicorn
-tensorflow
-tensorflow_hub
-wikipedia-api
-requests
-pillow
-numpy
-pandas
