@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8808dc0b-7635-439f-95d4-fdbe4927d944" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/What Building is This.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/fetch_image.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/landmarks_north_america.csv" afterDir="false" />
+    <list default="true" id="8808dc0b-7635-439f-95d4-fdbe4927d944" name="Changes" comment="Updated UI and Features">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +82,19 @@
       <option name="presentableId" value="Default" />
       <updated>1728056796546</updated>
     </task>
+    <task id="LOCAL-00001" summary="Updated UI and Features">
+      <option name="closed" value="true" />
+      <created>1750358858465</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1750358858465</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated UI and Features" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated UI and Features" />
   </component>
 </project>
