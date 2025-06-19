@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 
 from flask import Flask, request, jsonify
 import tensorflow.compat.v1 as tf
@@ -15,6 +16,9 @@ from fetch_image import get_wikidata_image
 
 
 tf.disable_eager_execution()
+
+# Load environment variables
+load_dotenv()
 
 # load model
 model_url = 'https://www.kaggle.com/models/google/landmarks/TensorFlow1/classifier-north-america-v1/1'
@@ -105,16 +109,23 @@ def get_wikipedia_info(building_name):
 
 # Create a Flask application
 app = Flask(__name__)
-# Update CORS configuration to be more specific
+
+# Update CORS configuration for production
+ALLOWED_ORIGINS = [
+    "https://rafzal2020.github.io",  # GitHub Pages
+    "http://localhost:3000"          # Local development
+]
+
 CORS(app, resources={
     r"/predict": {
-        "origins": ["http://localhost:3000"],
+        "origins": ALLOWED_ORIGINS,
         "methods": ["POST"],
         "allow_headers": ["Content-Type"]
     }
 })
 
-UPLOAD_FOLDER = "uploads"
+# Use environment variable for upload folder
+UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
@@ -175,4 +186,6 @@ def upload_image():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Use environment variables for host and port
+    port = int(os.getenv('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)

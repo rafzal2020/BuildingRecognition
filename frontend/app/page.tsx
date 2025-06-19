@@ -25,6 +25,9 @@ interface BuildingData {
   location?: string
 }
 
+// API URL based on environment
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 export default function BuildingRecognition() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
@@ -85,8 +88,7 @@ export default function BuildingRecognition() {
     setError(null)
 
     try {
-      // Connect to your Python backend
-      const response = await fetch("http://localhost:5000/predict", {
+      const response = await fetch(`${API_URL}/predict`, {
         method: "POST",
         body: formData,
       })
