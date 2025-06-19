@@ -108,7 +108,7 @@ app = Flask(__name__)
 # Update CORS configuration to be more specific
 CORS(app, resources={
     r"/predict": {
-        "origins": ["http://localhost:3000"],
+        "origins": ["https://buildingrecognition.onrender.com"],
         "methods": ["POST"],
         "allow_headers": ["Content-Type"]
     }
