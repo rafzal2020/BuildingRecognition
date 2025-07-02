@@ -25,9 +25,6 @@ interface BuildingData {
   location?: string
 }
 
-// API URL based on environment
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
 export default function BuildingRecognition() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
@@ -88,7 +85,8 @@ export default function BuildingRecognition() {
     setError(null)
 
     try {
-      const response = await fetch(`${API_URL}/predict`, {
+      // Connect to your Python backend
+      const response = await fetch("http://localhost:5000/predict", {
         method: "POST",
         body: formData,
       })
@@ -99,7 +97,13 @@ export default function BuildingRecognition() {
 
       const result = await response.json()
       console.log(result)
-      setData(result)
+      if (result.building_name === "Unknown") {
+        setError("Could not identify the building. Please try another image.")
+        setData(null) // Optionally clear previous data
+      } else {
+        setData(result)
+        setError(null)
+      }
     } catch (err) {
       setError("Failed to identify building. Please try again.")
       console.error("Upload error:", err)

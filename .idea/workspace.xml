@@ -5,9 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8808dc0b-7635-439f-95d4-fdbe4927d944" name="Changes" comment="added requirements.txt">
+      <change beforePath="$PROJECT_DIR$/.idea/What Building is This.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/What Building is This.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/render.yaml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/uploads/05_23_2022_Supertall_Building_111_West_57th_Street_from_Roof_NYC.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/uploads/432_Park_Avenue,_NY_(cropped)2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/uploads/DELTARUNE Chapter 4 6_16_2025 4_45_35 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/uploads/One_World_Trade_Center_Building_(2021).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/uploads/Robert Ferri_@Ceos_Downbeat (1).jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/uploads/View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_Cropped.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/uploads/brooklyn-tower.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/uploads/building-1-scaled.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.github/workflows/deploy.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/next.config.mjs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
@@ -39,27 +53,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.fetch_image.executor&quot;: &quot;Run&quot;,
-    &quot;Python.file.executor&quot;: &quot;Run&quot;,
-    &quot;Python.kaggle_download.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model_loader.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test-api.executor&quot;: &quot;Run&quot;,
-    &quot;Python.train_data_preprocessing.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/compsci/Projects/BuildingRecognition/backend&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.app.executor": "Run",
+    "Python.fetch_image.executor": "Run",
+    "Python.file.executor": "Run",
+    "Python.kaggle_download.executor": "Run",
+    "Python.model_loader.executor": "Run",
+    "Python.scratch.executor": "Run",
+    "Python.test-api.executor": "Run",
+    "Python.train_data_preprocessing.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\compsci\Projects\BuildingRecognition\backend" />

@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 
 from flask import Flask, request, jsonify
 import tensorflow.compat.v1 as tf
@@ -13,67 +12,12 @@ import fetch_image
 from flask_cors import CORS
 from wikipedia_scraper import get_infobox_fields
 from fetch_image import get_wikidata_image
+import openai
+import base64
+
+openai.api_key = "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"
 
 
-tf.disable_eager_execution()
-
-# Load environment variables
-load_dotenv()
-
-# load model
-model_url = 'https://www.kaggle.com/models/google/landmarks/TensorFlow1/classifier-north-america-v1/1'
-m = hub.load(model_url)
-
-
-def load_class_names(file_path):
-    df = pd.read_csv(file_path)
-    return dict(zip(df['id'].astype(str), df['name']))
-
-
-class_names = load_class_names('landmarks_north_america.csv')
-
-
-def preprocess_image(image_path):
-    img = Image.open(image_path).resize((321, 321))
-    img = np.array(img) / 255.0
-    return img
-
-
-def predict(image_path):
-    with tf.Graph().as_default():
-        image = preprocess_image(image_path)
-        image = np.expand_dims(image, axis=0)  # Add batch dimension
-
-        # Create a session and run the model
-        with tf.Session() as sess:
-            sess.run(tf.global_variables_initializer())  # Initialize global variables
-            sess.run(tf.tables_initializer())  # Initialize the lookup tables
-
-            # Get the model's signature for predictions
-            model = m.signatures['default']  # Access the default signature
-
-            # Pass the image to the model
-            pred = model(tf.constant(image, dtype=tf.float32))
-
-            # Print the output to inspect its structure
-            print(pred)
-
-            # Check the keys of the output
-            print("Output keys:", pred.keys())
-
-            # Evaluate the predictions inside the session
-            if 'default' in pred:
-                prediction_output = sess.run(pred['default'])  # Run the prediction to get output
-                label_index = np.argmax(prediction_output, axis=-1)[0]  # Get the index of the predicted label
-            else:
-                # If 'default' is not in pred, you may need to check other keys
-                prediction_output = sess.run(pred[list(pred.keys())[0]])  # Access the first key
-                label_index = np.argmax(prediction_output, axis=-1)[0]  # Get the index of the predicted label
-
-            building_name = class_names.get(str(label_index), "Unknown Building")
-            return label_index, building_name  # Return the index of the predicted label
-
-global_name = ""
 def get_wikipedia_info(building_name):
     user_agent = "BuildingRecognitionApp/1.0 (contact: rafzal2014@gmail.com)"
     wiki_wiki = wikipediaapi.Wikipedia(user_agent=user_agent)
@@ -107,25 +51,16 @@ def get_wikipedia_info(building_name):
     }
 
 
-# Create a Flask application
 app = Flask(__name__)
-
-# Update CORS configuration for production
-ALLOWED_ORIGINS = [
-    "https://rafzal2020.github.io",  # GitHub Pages
-    "http://localhost:3000"          # Local development
-]
-
 CORS(app, resources={
     r"/predict": {
-        "origins": ALLOWED_ORIGINS,
+        "origins": ["http://localhost:3000"],
         "methods": ["POST"],
         "allow_headers": ["Content-Type"]
     }
 })
 
-# Use environment variable for upload folder
-UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'uploads')
+UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
@@ -143,18 +78,43 @@ def upload_image():
 
         image_path = os.path.join(UPLOAD_FOLDER, image.filename)
         image.save(image_path)
+        with open(image_path, "rb") as image_file:
+            image_bytes = image_file.read()
+            image_base64 = base64.b64encode(image_bytes).decode("utf-8")
 
-        # Pass uploaded image to the model
-        predicted_label_index, predicted_building_name = predict(image_path)
-        print(f"Predicted building name: {predicted_building_name}")  # Debug print
-        
+        response = openai.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "user", "content": [
+                    {"type": "text", "text": "Identify the building in the image only. Do not provide any additional information or punctuation. If you cannnot identify the building, respond with 'Unknown'."},
+                    {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + image_base64}}
+                ]}
+            ],
+            max_tokens=500,
+        )
+        os.remove(image_path)  # Clean up the uploaded image after processing
+        if response.choices[0].message.content.strip() == "Unknown":
+            return jsonify({
+                "building_name": "Unknown",
+                "confidence": 0.0,
+                "wikipedia_info": {"description": "No information available.", "wikipedia_link": None, "image_url": None},
+                "height": None,
+                "floors": None,
+                "status": None,
+                "completed": None,
+                "topped-out": None,
+                "location": None,
+            })
+        else:
+            predicted_building_name = response.choices[0].message.content.strip()
+            print(f"Predicted building name: {predicted_building_name}")  # Debug print
 
         wiki_info = get_wikipedia_info(predicted_building_name)
-        print("1")
-        print(global_name)
-        
+
         try:
-            building_info = get_infobox_fields(predicted_building_name, ["architectural", "floor count", "status", "completed", "topped-out", "location"])
+            building_info = get_infobox_fields(predicted_building_name,
+                                               ["architectural", "floor count", "status", "completed", "topped-out",
+                                                "location"])
         except ValueError as e:
             print(f"Could not find building info: {str(e)}")
             building_info = {
@@ -165,8 +125,6 @@ def upload_image():
                 "topped-out": None,
                 "location": None,
             }
-
-    
 
         return jsonify({
             "building_name": predicted_building_name,
@@ -186,6 +144,4 @@ def upload_image():
 
 
 if __name__ == '__main__':
-    # Use environment variables for host and port
-    port = int(os.getenv('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
