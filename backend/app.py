@@ -14,9 +14,11 @@ from wikipedia_scraper import get_infobox_fields
 from fetch_image import get_wikidata_image
 import openai
 import base64
+from dotenv import load_dotenv
 
-openai.api_key = "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"
 
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def get_wikipedia_info(building_name):
     user_agent = "BuildingRecognitionApp/1.0 (contact: rafzal2014@gmail.com)"
