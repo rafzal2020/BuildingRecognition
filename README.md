@@ -1,6 +1,6 @@
 # Building Identifier App
 
-A web application that lets you upload a photo of a building and returns the name of the building, along with a link to its Wikipedia page. This implementation uses **LangChain**, **OpenAI GPT**, and **Google Cloud Vision API** to combine visual recognition with prompt-engineered language understanding.
+A web application that lets you upload a photo of a building and returns the name of the building, along with a link to its Wikipedia page. This implementation uses **LangChain** and **OpenAI GPT**, to combine visual recognition with prompt-engineered language understanding.
 
 ---
 
