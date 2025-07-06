@@ -49,7 +49,7 @@ def get_wikipedia_info(building_name):
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["https://buildingrecognition.onrender.com/"]}})
+CORS(app, origins="*", supports_credentials=True)
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
