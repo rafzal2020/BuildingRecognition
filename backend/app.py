@@ -1,13 +1,9 @@
 import os
 
 from flask import Flask, request, jsonify
-import tensorflow.compat.v1 as tf
-import tensorflow_hub as hub
 import wikipediaapi
 import requests
 from PIL import Image
-import numpy as np
-import pandas as pd
 import fetch_image
 from flask_cors import CORS
 from wikipedia_scraper import get_infobox_fields
@@ -16,8 +12,7 @@ import openai
 import base64
 from dotenv import load_dotenv
 
-
-load_dotenv()
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def get_wikipedia_info(building_name):
@@ -69,7 +64,6 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 @app.route('/predict', methods=['POST'])
 def upload_image():
     try:
-        print("Request received")
         if 'image' not in request.files:
             return jsonify({"error": "No image uploaded"}), 400
 
