@@ -4,7 +4,7 @@ A web application that lets you upload a photo of a building and returns the nam
 
 ---
 
-## Demo
+![Demo](demo.gif)
 
 
 ---
