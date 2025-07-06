@@ -1,12 +1,10 @@
-// next.config.mjs
-import dotenv from "dotenv";
-dotenv.config();
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    NEXT_PUBLIC_RENDER_API_URL: process.env.NEXT_PUBLIC_RENDER_API_URL,
+    RENDER_API_URL: process.env.RENDER_API_URL,
   },
-};
 
-export default nextConfig;
+}
+
+export default nextConfig
