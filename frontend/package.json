@@ -6,7 +6,7 @@
     "build": "next build && next export",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "export": "next export",
     "deploy": "npm run build && gh-pages -d out"
   },
