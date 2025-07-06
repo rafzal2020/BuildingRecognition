@@ -1,19 +1,12 @@
-/** @type {import('next').NextConfig} */
-const isGithubPages = process.env.GITHUB_PAGES === 'true'
-const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
-  },
-  assetPrefix: isGithubPages ? '/building-recognition/' : '',
-  basePath: isGithubPages ? '/<building-recognition>' : '',
-  trailingSlash: true,
-  output: 'export', // static export for GitHub Pages
-}
+// next.config.mjs
+import dotenv from "dotenv";
+dotenv.config();
 
-export default nextConfig
+const nextConfig = {
+  reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_RENDER_API_URL: process.env.NEXT_PUBLIC_RENDER_API_URL,
+  },
+};
+
+export default nextConfig;
