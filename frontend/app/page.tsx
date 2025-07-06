@@ -33,6 +33,8 @@ export default function BuildingRecognition() {
   const [loading, setLoading] = useState(false)
   const [dragActive, setDragActive] = useState(false)
 
+  const apiUrl = process.env.NEXT_PUBLIC_RENDER_API_URL;
+
   const handleFileChange = (file: File) => {
     setSelectedImage(file)
     setError(null)
@@ -86,7 +88,7 @@ export default function BuildingRecognition() {
 
     try {
       // Connect to your Python backend
-      const response = await fetch("http://localhost:5000/predict", {
+      const response = await fetch(`${apiUrl}/predict`, {
         method: "POST",
         body: formData,
       })
